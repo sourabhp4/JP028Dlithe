@@ -8,8 +8,24 @@
 <link rel="stylesheet" href="login.css"/>
 </head>
 <%
-	String errorMessage = (String) session.getAttribute("errorMessage");
-	session.removeAttribute("errorMessage");
+	String errorMessage="", message="";
+	try{
+		if (session.getAttribute("errorMessage") != null) {
+	        errorMessage = session.getAttribute("errorMessage").toString();
+	    } else {
+	        errorMessage = "";
+	    }
+	    
+	    if (session.getAttribute("message") != null) {
+	        message = session.getAttribute("message").toString();
+	    } else {
+	        message = "";
+	    }
+		session.removeAttribute("errorMessage");
+		session.removeAttribute("message");
+	}catch(Exception e){
+		out.print(e);
+	}
 %>
 <body>
 	<div class="container">
@@ -37,10 +53,15 @@
 	      	<p>New User? <a href="signUp.jsp">Click here</a></p>
 	      </div>
 	      <div>
-	      	<% if (errorMessage != null) { %>
+	      	<% if (errorMessage != null && !errorMessage.equals("")) { %>
 		    <p style="color: red"><strong>Error:</strong> <%= errorMessage %></p>
 		  	<% }%>
 	      </div>
+	      <% if (message != null && !message.equals("")) { %>
+	      	<div>
+		    	<p style="color: green"><strong>Message:</strong> <%= message %></p>
+	      	</div>
+		  <% }%>
 	    </form>
     </div>
 </body>

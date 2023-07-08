@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="java.sql.*"
- %>
+<%@ page import="java.sql.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,8 +47,8 @@
     		smt.close();
     		con.close();
             errorMessage = "Registration Successful...";
-            session.setAttribute("errorMessage", errorMessage);
-            response.sendRedirect("userHome.jsp");
+            session.setAttribute("message", errorMessage);
+            response.sendRedirect("index.jsp");
         } else {
         	errorMessage = "Something went wrong, Try again...";
             session.setAttribute("errorMessage", errorMessage);

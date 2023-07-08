@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="java.sql.*"
- %>
+<%@ page import="java.sql.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +27,8 @@
 		ResultSet rs = smt.executeQuery(sql);
         if (rs.next()) {
             String errorMessage = "Login Successful...";
+            session.setAttribute("username", emailID);
+            session.setAttribute("userType", type);
             session.setAttribute("errorMessage", errorMessage);
             rs.close();
     		smt.close();

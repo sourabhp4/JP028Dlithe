@@ -8,8 +8,11 @@
 <link rel="stylesheet" href="login.css"/>
 </head>
 <%
-	String errorMessage = (String) session.getAttribute("errorMessage");
-	session.removeAttribute("errorMessage");
+	String errorMessage = null;
+	if(session.getAttribute("errorMessage") != null){
+		errorMessage = (String) session.getAttribute("errorMessage");
+		session.removeAttribute("errorMessage");
+	}
 %>
 <body>
 	<div class="container">
