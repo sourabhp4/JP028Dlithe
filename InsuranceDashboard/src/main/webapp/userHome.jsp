@@ -57,7 +57,6 @@
 		            	<td><% out.print(rs.getString("name")); %></td>
 		            	<td><% out.print(rs.getString("type")); %></td>
 		            	<td><% out.print(rs.getString("premium")); %></td>
-		            	<%session.setAttribute("purchased", "no"); %>
 		            	<td><a href="viewInsuranceUser.jsp?pid=<%= rs.getInt("pid")%>" ><button class="button3">VIEW</button></a></td>
     						</a>
 						</td>

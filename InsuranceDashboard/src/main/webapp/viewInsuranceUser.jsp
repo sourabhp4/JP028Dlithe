@@ -11,10 +11,8 @@
 <body>
 	<%
 		String pid = request.getParameter("pid");
-		String purchased = request.getParameter("purchased");
+		boolean purchased = false;
 		session.removeAttribute("purchased");
-		if(purchased == null)
-			purchased = "";
 		String url = "jdbc:mysql://localhost:3306/insurancedb";
 		String user = "root", password = "admin123";
 		String sql, message;
@@ -24,8 +22,13 @@
 			Connection con = DriverManager.getConnection(url, user, password);
 			Statement smt = con.createStatement();
 			
-			sql = "select * from policies where pid=" + pid;
+			sql = "select * from policies, user_policies where policies.pid = user_policies.pid and policies.pid=" + pid;
 			ResultSet rs = smt.executeQuery(sql);
+			purchased = rs.next() ? true : false;
+			
+			
+			sql = "select * from policies where pid=" + pid;
+			rs = smt.executeQuery(sql);
 	        if (rs.next()) {
 	            name = rs.getString("name");
 	            time_period = "" + rs.getInt("time_period");
@@ -68,9 +71,9 @@
 	        <label for="benefits">Benefits:</label>
 	        <textarea id="benefits" name="benefits" rows="4" readonly><%= benefits %></textarea>
 	    </form>
-	    <a href="purchaseInsurance.jsp?pid=<%= pid %>" onclick="return confirmPurchase();">
- 				<button class="button1" style="margin-left: 25%; width: 50%" <%= !purchased.equalsIgnoreCase("yes") ? "" : "disabled"%>>PURCHASE</button>
-    	</a>
+		<a href="purchaseInsurance.jsp?pid=<%= pid %>" onclick="return confirmPurchase();" style="<%= purchased ? "display: none;" : "" %>">
+		  <button class="button1" style="margin-left: 25%; width: 50%" <%= !purchased ? "" : "disabled" %>>PURCHASE</button>
+		</a>
 		<script>
 		    function confirmPurchase() {
 		        return confirm("Are you sure you want to purchase this insurance?");

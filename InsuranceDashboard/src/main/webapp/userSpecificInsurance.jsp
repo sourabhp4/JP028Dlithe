@@ -69,7 +69,6 @@
 		            	<td><% out.print(rs.getString("ending_date")); %></td>
 		            	<td><% out.print(rs.getString("premium")); %></td>
 		            	<td><% out.print(rs.getString("status")); %></td>
-		            	<%session.setAttribute("purchased", "yes"); %>
 		            	<td><a href="viewInsuranceUser.jsp?pid=<%= rs.getInt("pid")%>" ><button class="button3">VIEW</button></a></td>
     						</a>
 						</td>
